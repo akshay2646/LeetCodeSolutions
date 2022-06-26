@@ -1,0 +1,52 @@
+class Solution {
+public:
+    bool isValid(string s) {
+        bool bReturnValue { true };
+        std::stack<char> st;
+        for(char data:s)
+        {
+            if(data == '[' || data == '{' || data == '(')
+                st.push(data);
+            else if(data == ')')
+            {  
+                if(st.empty())
+                   return false;
+                if(st.top() != '(')
+                {
+                    bReturnValue = false;
+                    break;
+                }
+                
+                st.pop();
+            }
+            else if(data == '}')
+            {
+                if(st.empty())
+                   return false;
+                if(st.top() != '{')
+                {
+                    bReturnValue = false;
+                    break;
+                }
+                
+                st.pop();
+            }
+            else if(data == ']')
+            {
+               if(st.empty())
+                   return false;
+                if(st.top() != '[')
+                {
+                    bReturnValue = false;
+                    break;
+                }
+                
+                st.pop();
+            }
+        }
+        if(!st.empty())
+            bReturnValue = false;
+        
+        return bReturnValue;
+    }
+};
