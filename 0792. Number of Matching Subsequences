@@ -1,0 +1,29 @@
+class Solution {
+public:
+    int numMatchingSubseq(string s, vector<string>& words) {
+        int count {0};
+        std::map<std::string,int> wordCount {};
+        for(const string& word:words)
+        {
+            ++wordCount[word];
+        }
+
+        for(auto it = wordCount.begin(); it != wordCount.end(); ++it)
+        {
+            int i{0};
+            int j{0};
+            
+            while(i<(it->first).size() and j<s.size())
+            {
+                if((it->first)[i] == s[j])
+                    ++i;
+                
+                ++j;
+            }
+            if(i == (it->first).size())
+                count += it->second;
+        }
+        return count;
+        
+    }
+};
